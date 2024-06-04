@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Home Stock Manager</string>
+    <string name="switch_test">this is a tester</string>
+    <string name="title">Personal Stock Checker</string>
+    <string name="search">Search</string>
+
+    <string name="menu_search">Search</string>
+
+    <string name="search_item">Search</string>
+    <string name="view_all">View</string>
+    <string name="add_new">Add</string>
+
+    <string name="element_text">Testing</string>
+
+
+    <string name="item_count">item_count</string>
+    <string name="item_name">item_name</string>
+    <string name="name_label">Name: </string>
+    <string name="count_label">Amount: </string>
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="view_tester">VIEW TESTER</string>
+
+</resources>
