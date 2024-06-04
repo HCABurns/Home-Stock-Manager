@@ -5,13 +5,14 @@
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:gravity="center_vertical"
-    android:paddingBottom="20dp">
+    android:paddingBottom="20dp"
+    >
 
     <LinearLayout
         android:id="@+id/item_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CFCECE"
+        android:background="@drawable/rounded_layout"
         android:orientation="vertical">
 
         <LinearLayout

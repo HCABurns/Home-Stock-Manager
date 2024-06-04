@@ -18,11 +18,6 @@ import models.Item;
 
 public class MainActivity extends AppCompatActivity {
 
-    //RecyclerView recyclerView = findViewById(R.id.view_all);
-    dbHelper dbHelper = new dbHelper();
-    //ArrayList<Item> items = dbHelper.getItems();
-    //ViewAdapter adapter = new ViewAdapter(items);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
