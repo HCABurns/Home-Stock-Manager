@@ -4,10 +4,18 @@ import java.util.ArrayList;
 
 import models.Item;
 
+/**
+ * This class is the database helper class. It is used to store, add and update
+ * items in the database.
+ */
 public class dbHelper {
 
     private ArrayList<Item> items = new ArrayList<>();
 
+    /**
+     * This function will return an ArrayList of Items retrieved from the database.
+     * @return an ArrayList of Items that have been retrieved and put into an object.
+     */
     public ArrayList<Item> getItems(){
         System.out.println("Getting items from database.");
         Item item = new Item("Cheese",2, Item.Type.OTHER,false);
