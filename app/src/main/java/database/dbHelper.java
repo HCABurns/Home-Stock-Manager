@@ -18,6 +18,8 @@ public class dbHelper {
         items.add(item2);
         items.add(item3);
         items.add(new Item("Flour",0, Item.Type.OTHER,true));
+        items.add(new Item("Egg",3, Item.Type.OTHER,false));
+        items.add(new Item("Butter",1, Item.Type.OTHER,true));
         return items;
     }
 
