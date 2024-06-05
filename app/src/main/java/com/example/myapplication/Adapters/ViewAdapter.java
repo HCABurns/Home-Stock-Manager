@@ -1,17 +1,19 @@
 package com.example.myapplication.Adapters;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.comparators.ItemComparator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import models.Item;
 
@@ -75,6 +77,12 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
 
         textView = viewHolder.itemView.findViewById(R.id.item_name);
         textView.setText(item.getName());
+
+        if (item.getRequired().equals(true)){
+            Drawable layout = ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.rounded_layout_red);
+            viewHolder.itemView.findViewById(R.id.item_container).setBackground(layout);
+            //viewHolder.getTextView().setBackgroundColor(Color.RED);
+        }
         //viewHolder.getTextView().setText(items.get(position).toString());
 
         //TextView textView = (TextView) findViewById(R.id.item_cost);

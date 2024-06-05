@@ -9,6 +9,8 @@ public class Item {
 
     private Type type;
 
+    private Boolean required;
+
     public enum Type{
         VEGETABLE,
         FRUIT,
@@ -16,10 +18,11 @@ public class Item {
         OTHER
     }
 
-    public Item(String name, int count, Type type){
+    public Item(String name, int count, Type type, Boolean required){
         this.name = name;
         this.count = count;
         this.type = type;
+        this.required = required;
     }
 
     public String getName() {return name;}
@@ -34,20 +37,29 @@ public class Item {
 
     public void setType(Type type) {this.type = type;}
 
+    public Boolean getRequired() {
+        return required;
+    }
+
+    public void setRequired(Boolean required) {
+        this.required = required;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
                 "name='" + name + '\'' +
                 ", count=" + count +
                 ", type=" + type +
+                ", required=" + required +
                 '}';
     }
 
     public static void main(String[] args) {
-        Item item = new Item("Cucumber",1, Type.VEGETABLE);
-        Item item2 = new Item("Chicken Portions",3,Type.MEAT);
-        Item item3 = new Item("Plum Tomatoes",8,Type.VEGETABLE);
-        Item item4 = new Item("Yogurt",1,Type.OTHER);
+        Item item = new Item("Cucumber",1, Type.VEGETABLE,false);
+        Item item2 = new Item("Chicken Portions",3,Type.MEAT,false);
+        Item item3 = new Item("Plum Tomatoes",8,Type.VEGETABLE,false);
+        Item item4 = new Item("Yogurt",1,Type.OTHER,false);
 
         System.out.println(item);
     }

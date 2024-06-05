@@ -11,7 +11,7 @@
         android:id="@+id/addTextTest"
         android:layout_width="0dp"
         android:layout_height="67dp"
-        android:layout_marginBottom="156dp"
+        android:layout_marginBottom="36dp"
         android:background="#000000"
         android:clickable="false"
         android:fontFamily="sans-serif-medium"
@@ -22,7 +22,7 @@
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -40,7 +40,6 @@
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/view_all"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.425"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +53,7 @@
         android:layout_marginBottom="132dp"
         app:layout_constraintBottom_toTopOf="@+id/addTextTest"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addTextTest2" />
 
