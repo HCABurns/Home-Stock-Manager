@@ -72,16 +72,13 @@ public class ViewFragment extends Fragment {
         //Toast.makeText(getActivity(), "Hello this is a test", Toast.LENGTH_SHORT).show();
 
         View view = inflater.inflate(R.layout.fragment_view, container, false);
-
-        System.out.println("START =-------------------------");
         RecyclerView recyclerView = view.findViewById(R.id.view_all);
-        System.out.println(recyclerView);
         dbHelper dbHelper = new dbHelper();
         ArrayList<Item> items = dbHelper.getItems();
         ViewAdapter adapter = new ViewAdapter(items);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        System.out.println("END ------------------------");
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
+                LinearLayoutManager.VERTICAL, false));
         return view;
     }
 }

@@ -1,13 +1,15 @@
 package com.example.myapplication.Adapters;
 
-import android.graphics.Color;
+
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +31,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
+
 
         public ViewHolder(View view) {
             super(view);
@@ -61,7 +64,6 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_row, viewGroup, false);
-
         return new ViewHolder(view);
     }
 
@@ -72,27 +74,67 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         Item item = items.get(position);
-        System.out.println(position  + " , " + item.toString() + items.size());
-        TextView textView = viewHolder.itemView.findViewById(R.id.item_count);
-        textView.setText(String.valueOf(item.getCount()));
+        TextView itemCountTextView = viewHolder.itemView.findViewById(R.id.item_count);
+        itemCountTextView.setText(String.valueOf(item.getCount()));
 
-        textView = viewHolder.itemView.findViewById(R.id.item_name);
-        textView.setText(item.getName());
+        TextView itemNameTextView = viewHolder.itemView.findViewById(R.id.item_name);
+        itemNameTextView.setText(item.getName());
+
+        Switch required_switch =  viewHolder.itemView.findViewById(R.id.required_switch);
 
         if (item.getRequired().equals(true)){
-            Drawable layout = ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.rounded_layout_red);
+            Drawable layout = ContextCompat.getDrawable(viewHolder.itemView.getContext(),
+                    R.drawable.rounded_layout_red);
             viewHolder.itemView.findViewById(R.id.item_container).setBackground(layout);
             //Set switch to checked if the item is required.
-            Switch required_switch =  viewHolder.itemView.findViewById(R.id.required_switch);
             required_switch.setChecked(true);
             //viewHolder.getTextView().setBackgroundColor(Color.RED);
         }
 
+        /*
+         * Adds an onchecked listener item to the required switch. Changes colour of the row based
+         * on if the item has been checked or not.
+         */
+        required_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+                Drawable layout;
+                if (isChecked){
+                    layout = ContextCompat.getDrawable(viewHolder.itemView.getContext(),
+                            R.drawable.rounded_layout_red);
+                    //Update DB here
+                    item.setRequired(true);
+                }
+                else{
+                    layout = ContextCompat.getDrawable(viewHolder.itemView.getContext(),
+                            R.drawable.rounded_layout);
+                    //Update DB here
+                    item.setRequired(false);
+                }
+                viewHolder.itemView.findViewById(R.id.item_container).setBackground(layout);
+            }});
 
-        //viewHolder.getTextView().setText(items.get(position).toString());
+        AppCompatButton add_button = viewHolder.itemView.findViewById(R.id.count_plus);
+        AppCompatButton remove_button = viewHolder.itemView.findViewById(R.id.count_remove);
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                item.setCount(item.getCount()+1);
+                itemCountTextView.setText(String.valueOf(item.getCount()));
+                //Update DB here
+            }
+        });
+        remove_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int count = item.getCount();
+                if (count != 0) {
+                    item.setCount(count - 1);
+                    itemCountTextView.setText(String.valueOf(item.getCount()));
+                }
+                //Update DB here
+            }
+        });
 
-        //TextView textView = (TextView) findViewById(R.id.item_cost);
-        //viewHolder.g
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -100,4 +142,6 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
     public int getItemCount() {
         return items.size();
     }
+
+
 }
