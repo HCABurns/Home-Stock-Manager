@@ -17,6 +17,8 @@
     <string name="item_name">item_name</string>
     <string name="name_label">Name: </string>
     <string name="count_label">Amount: </string>
+    <string name="add"> + </string>
+    <string name="remove"> - </string>
 
 
 

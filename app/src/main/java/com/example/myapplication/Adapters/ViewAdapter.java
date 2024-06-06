@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -81,8 +82,13 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
         if (item.getRequired().equals(true)){
             Drawable layout = ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.rounded_layout_red);
             viewHolder.itemView.findViewById(R.id.item_container).setBackground(layout);
+            //Set switch to checked if the item is required.
+            Switch required_switch =  viewHolder.itemView.findViewById(R.id.required_switch);
+            required_switch.setChecked(true);
             //viewHolder.getTextView().setBackgroundColor(Color.RED);
         }
+
+
         //viewHolder.getTextView().setText(items.get(position).toString());
 
         //TextView textView = (TextView) findViewById(R.id.item_cost);
