@@ -29,6 +29,8 @@ public class ViewFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private dbHelper dbHelper = new dbHelper();
+
     // TODO: Rename and change types of parameters
     private String name;
     private String amount;
@@ -70,10 +72,9 @@ public class ViewFragment extends Fragment {
         // Inflate the layout for this fragment
 
         //Toast.makeText(getActivity(), "Hello this is a test", Toast.LENGTH_SHORT).show();
-
+        System.out.println("OPENING THE VIEW PAGE -----------------------------");
         View view = inflater.inflate(R.layout.fragment_view, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.view_all);
-        dbHelper dbHelper = new dbHelper();
         ArrayList<Item> items = dbHelper.getItems();
         ViewAdapter adapter = new ViewAdapter(items);
         recyclerView.setAdapter(adapter);
