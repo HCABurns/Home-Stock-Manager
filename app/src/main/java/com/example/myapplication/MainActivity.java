@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment viewFragment = new ViewFragment();
         Fragment addFragment = new AddFragment();
         Fragment searchFragment = new SearchFragment();
+        Fragment menuFragment = new MenuFragment();
 
         //Create a fragment manager and swap the empty frame to the home fragment frame.
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -67,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, searchFragment)
+                        .commit();
+                return true;
+            }
+            else if (item.getItemId() == R.id.menu){
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, menuFragment)
                         .commit();
                 return true;
             }
