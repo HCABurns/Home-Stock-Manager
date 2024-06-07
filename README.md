@@ -17,5 +17,8 @@ There are 5 pages that are required for this project which are: Homepage, view p
 ## To do
 
 - Learn the basics of app creation including: fragments, recyclerViews, viewAdapters and page navigation.
-- Look into shared database in java - Firebase.
+- Functionality of the add: Own page, button on the view page etc.
+- Functionality of search / outcome of the search.
+- Contents of item in the menu: Name - ingredients etc.
+- Look into shared database in java - Firebase / MongoDB / AWS / Python-Flask-SQLite API.
 - Design the required elements: Lo-Fi and Hi-Fi designs, item class table, database design.
