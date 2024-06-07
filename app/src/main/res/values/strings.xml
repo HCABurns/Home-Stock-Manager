@@ -9,6 +9,7 @@
     <string name="search_item">Search</string>
     <string name="view_all">View</string>
     <string name="add_new">Add</string>
+    <string name="menu">Menu</string>
 
     <string name="element_text">Testing</string>
 
@@ -19,6 +20,11 @@
     <string name="count_label">Amount: </string>
     <string name="add"> + </string>
     <string name="remove"> - </string>
+
+
+    <string name="name_title"> <u>Name</u> </string>
+    <string name="quantity_title"> <u>Quantity</u> </string>
+    <string name="required_title"> <u>Required</u> </string>
 
 
 

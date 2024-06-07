@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
 }
+task("testClasses")
 
 android {
     namespace = "com.example.myapplication"
