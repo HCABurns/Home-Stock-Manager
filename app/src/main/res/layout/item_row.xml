@@ -21,14 +21,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/item_name"
+            android:layout_gravity="center"
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/item_count"
+            android:id="@+id/menu_name"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/item_count"
+            android:layout_gravity="center"
             android:textColor="@color/black" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -38,6 +40,7 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_layout_button_green"
             android:text="@string/add"
+            android:layout_gravity="center"
             android:textColor="@color/black" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -45,6 +48,7 @@
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:background="@drawable/rounded_layout_button_red"
             android:text="@string/remove" />
 
@@ -52,6 +56,7 @@
             android:id="@+id/required_switch"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
+            android:layout_gravity="center"
             android:layout_weight="1" />
     </LinearLayout>
 
