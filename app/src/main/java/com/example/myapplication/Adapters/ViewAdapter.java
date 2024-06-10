@@ -74,7 +74,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         Item item = items.get(position);
-        TextView itemCountTextView = viewHolder.itemView.findViewById(R.id.item_count);
+        TextView itemCountTextView = viewHolder.itemView.findViewById(R.id.menu_name);
         itemCountTextView.setText(String.valueOf(item.getCount()));
 
         TextView itemNameTextView = viewHolder.itemView.findViewById(R.id.item_name);
