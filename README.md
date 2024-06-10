@@ -19,6 +19,9 @@ There are 5 pages that are required for this project which are: Homepage, view p
 - Learn the basics of app creation including: fragments, recyclerViews, viewAdapters and page navigation.
 - Functionality of the add: Own page, button on the view page etc.
 - Functionality of search / outcome of the search.
-- Contents of item in the menu: Name - ingredients etc.
+- Contents of item in the menu: Date , Name etc.
 - Look into shared database in java - Firebase / MongoDB / AWS / Python-Flask-SQLite API.
 - Design the required elements: Lo-Fi and Hi-Fi designs, item class table, database design.
+
+## To do - After functional app created:
+- Extend the menu section: Possible ingredients list linking to items already in the database.
