@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.myapplication.Adapters.MenuAdapter;
 import com.example.myapplication.Adapters.ViewAdapter;
+import com.example.myapplication.Interfaces.RecyclerViewInterface;
 
 import java.util.ArrayList;
 
@@ -24,12 +26,14 @@ import models.MenuItem;
  * Use the {@link MenuFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuFragment extends Fragment {
+public class MenuFragment extends Fragment implements RecyclerViewInterface {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private ArrayList<MenuItem> items;
 
     private dbHelper dbHelper = new dbHelper();
 
@@ -76,11 +80,26 @@ public class MenuFragment extends Fragment {
         System.out.println("OPENING THE MENU PAGE -----------------------------");
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.menu_recycler);
-        ArrayList<MenuItem> items = dbHelper.getMenuItems();
-        MenuAdapter adapter = new MenuAdapter(items);
+        items = dbHelper.getMenuItems();
+        MenuAdapter adapter = new MenuAdapter(items,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
         return view;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
+        Intent intent = new Intent(getContext(), SingleMenuItemFragment.class);//MenuItem.class);
+
+        intent.putExtra("Name" , items.get(position).getName());
+
+        System.out.println("Test: " + position);
+
+        startActivity(intent);
+
+        // Todo: Create activity / Fragment to display the information and allow for editing.
+
     }
 }
