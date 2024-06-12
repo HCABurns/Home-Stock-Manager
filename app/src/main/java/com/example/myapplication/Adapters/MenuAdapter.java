@@ -30,6 +30,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
         public MenuHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
+            //Todo: Onclick to edit the item.
 
             day_view = view.findViewById(R.id.menu_day);
             name_view = view.findViewById(R.id.menu_name);
@@ -72,18 +73,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         MenuItem item = items.get(position);
-        System.out.println(item.toString() + " " +getItemCount());
+        viewHolder.getName_view().setText(String.valueOf(item.getName()));
+        viewHolder.getDay_view().setText(item.dayStringHashMap.get(item.getDay()));
 
-        TextView nameView = viewHolder.getName_view().findViewById(R.id.menu_name);
-        nameView.setText(String.valueOf(item.getName()));
-
-        TextView dayView = viewHolder.getDay_view();//.findViewById(R.id.menu_day);
-        System.out.println(dayView);
-        System.out.println(item.dayStringHashMap.get(item.getDay()));
-        dayView.setText(item.dayStringHashMap.get(item.getDay()));
-
-        //TextView itemNameTextView = viewHolder.itemView.findViewById(R.id.menu_day);
-        //itemNameTextView.setText(item.getName());
     }
 
     @Override
