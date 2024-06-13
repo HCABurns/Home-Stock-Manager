@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment viewFragment = new ViewFragment();
         Fragment addFragment = new AddFragment();
         Fragment searchFragment = new SearchFragment();
-        Fragment menuFragment = new MenuFragment();
+        Fragment menuFragment = new MenuFragment(getBaseContext());
 
         //Create a fragment manager and swap the empty frame to the home fragment frame.
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
