@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.myapplication.Adapters.MenuAdapter;
 import com.example.myapplication.Adapters.ViewAdapter;
@@ -33,6 +35,8 @@ public class MenuFragment extends Fragment implements RecyclerViewInterface {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    public static Context context;
+
     private ArrayList<MenuItem> items;
 
     private dbHelper dbHelper = new dbHelper();
@@ -41,7 +45,8 @@ public class MenuFragment extends Fragment implements RecyclerViewInterface {
     private String mParam1;
     private String mParam2;
 
-    public MenuFragment() {
+    public MenuFragment(Context context) {
+        MenuFragment.context = context;
         // Required empty public constructor
     }
 
@@ -55,7 +60,7 @@ public class MenuFragment extends Fragment implements RecyclerViewInterface {
      */
     // TODO: Rename and change types and number of parameters
     public static MenuFragment newInstance(String param1, String param2) {
-        MenuFragment fragment = new MenuFragment();
+        MenuFragment fragment = new MenuFragment(MenuFragment.context);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -97,7 +102,11 @@ public class MenuFragment extends Fragment implements RecyclerViewInterface {
 
         System.out.println("Test: " + position);
 
-        startActivity(intent);
+        //startActivity(intent);
+
+        System.out.println(context);
+
+        Toast.makeText(context, "Amount can not be grater than invoice", Toast.LENGTH_SHORT).show();
 
         // Todo: Create activity / Fragment to display the information and allow for editing.
 
