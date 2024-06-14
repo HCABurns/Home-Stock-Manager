@@ -1,12 +1,19 @@
 package com.example.myapplication.Adapters;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Interfaces.RecyclerViewInterface;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.comparators.MenuItemComparator;
 
@@ -17,7 +24,7 @@ import models.MenuItem;
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
     private ArrayList<MenuItem> items;
-
+    private final RecyclerViewInterface recyclerViewInterface;
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder)
@@ -26,13 +33,27 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
         private final TextView day_view;
         private final TextView name_view;
 
-
-        public MenuHolder(View view) {
+        public MenuHolder(View view, RecyclerViewInterface recyclerViewInterface) {
             super(view);
-            // Define click listener for the ViewHolder's View
 
             day_view = view.findViewById(R.id.menu_day);
             name_view = view.findViewById(R.id.menu_name);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null){
+                        int position = getAdapterPosition();
+
+                        if (position != RecyclerView.NO_POSITION){
+                            recyclerViewInterface.onItemClick(position);
+                        }
+                    }
+                    String day = day_view.getText().toString();
+                    String food = name_view.getText().toString();
+                    System.out.println(day + " : " + food);
+                }
+            });
         }
 
         public TextView getDay_view() {
@@ -50,8 +71,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
      * @param dataSet ArrayList<Item> containing the data to populate views to be used
      * by RecyclerView.
      */
-    public MenuAdapter(ArrayList<MenuItem> dataSet) {
+    public MenuAdapter(ArrayList<MenuItem> dataSet , RecyclerViewInterface recyclerViewInterface) {
         this.items = dataSet;
+        this.recyclerViewInterface = recyclerViewInterface;
         MenuItemComparator menuItemComparator = new MenuItemComparator();
         items.sort(menuItemComparator);
     }
@@ -62,7 +84,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.menu_row, viewGroup, false);
-        return new MenuAdapter.MenuHolder(view);
+        return new MenuAdapter.MenuHolder(view,recyclerViewInterface);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -72,18 +94,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         MenuItem item = items.get(position);
-        System.out.println(item.toString() + " " +getItemCount());
-
-        TextView nameView = viewHolder.getName_view().findViewById(R.id.menu_name);
-        nameView.setText(String.valueOf(item.getName()));
-
-        TextView dayView = viewHolder.getDay_view();//.findViewById(R.id.menu_day);
-        System.out.println(dayView);
-        System.out.println(item.dayStringHashMap.get(item.getDay()));
-        dayView.setText(item.dayStringHashMap.get(item.getDay()));
-
-        //TextView itemNameTextView = viewHolder.itemView.findViewById(R.id.menu_day);
-        //itemNameTextView.setText(item.getName());
+        viewHolder.getName_view().setText(String.valueOf(item.getName()));
+        viewHolder.getDay_view().setText(MenuItem.dayStringHashMap.get(item.getDay()));
     }
 
     @Override

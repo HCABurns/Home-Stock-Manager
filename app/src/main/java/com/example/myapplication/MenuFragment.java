@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.myapplication.Adapters.MenuAdapter;
 import com.example.myapplication.Adapters.ViewAdapter;
+import com.example.myapplication.Interfaces.RecyclerViewInterface;
 
 import java.util.ArrayList;
 
@@ -24,12 +28,18 @@ import models.MenuItem;
  * Use the {@link MenuFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuFragment extends Fragment {
+public class MenuFragment extends Fragment implements RecyclerViewInterface {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    public static Context context;
+
+    private ArrayList<MenuItem> items;
+
+    private RecyclerView recyclerView;
 
     private dbHelper dbHelper = new dbHelper();
 
@@ -37,7 +47,8 @@ public class MenuFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public MenuFragment() {
+    public MenuFragment(Context context) {
+        MenuFragment.context = context;
         // Required empty public constructor
     }
 
@@ -51,7 +62,7 @@ public class MenuFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static MenuFragment newInstance(String param1, String param2) {
-        MenuFragment fragment = new MenuFragment();
+        MenuFragment fragment = new MenuFragment(MenuFragment.context);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,12 +86,38 @@ public class MenuFragment extends Fragment {
 
         System.out.println("OPENING THE MENU PAGE -----------------------------");
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.menu_recycler);
-        ArrayList<MenuItem> items = dbHelper.getMenuItems();
-        MenuAdapter adapter = new MenuAdapter(items);
+        recyclerView = view.findViewById(R.id.menu_recycler);
+        items = MainActivity.dbHelper.getMenuItems();
+        MenuAdapter adapter = new MenuAdapter(items,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
         return view;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
+        Intent intent = new Intent(getContext(), SingleMenuItemFragment.class);//MenuItem.class);
+
+        intent.putExtra("Name" , items.get(position).getName());
+        System.out.println("ITEM TO PUT INTO INTENT IS: " + items.get(position).getDay());
+        intent.putExtra("Day" , MenuItem.dayStringHashMap.get(items.get(position).getDay()));
+
+        startActivity(intent);
+
+        //System.out.println(context);
+
+        //Toast.makeText(context, "Amount can not be grater than invoice", Toast.LENGTH_SHORT).show();
+
+        // Todo: Create activity / Fragment to display the information and allow for editing.
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //This will update the recycler view.
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }

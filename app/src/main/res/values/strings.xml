@@ -13,13 +13,17 @@
 
     <string name="element_text">Testing</string>
 
-
+    Item names
     <string name="item_count">item_count</string>
     <string name="item_name">item_name</string>
     <string name="name_label">Name: </string>
     <string name="count_label">Amount: </string>
+
+    Button Names
     <string name="add"> + </string>
     <string name="remove"> - </string>
+    <string name="update"> Update </string>
+
 
 
     <string name="name_title"> <u>Name</u> </string>
@@ -29,7 +33,6 @@
 
     <string name="menu_name"> Menu name </string>
     <string name="menu_day"> Menu day </string>
-
 
 
     <!-- TODO: Remove or change this placeholder text -->

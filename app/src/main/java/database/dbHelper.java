@@ -2,6 +2,7 @@ package database;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import models.Item;
 import models.MenuItem;
@@ -67,6 +68,16 @@ public class dbHelper {
                 item.setName(name);
             }
         }
+    }
+
+    public void editMenuItem(String day, String name){
+        for (MenuItem item : menuItems) {
+            if (day.equals(MenuItem.dayStringHashMap.get(item.getDay()))){
+                System.out.println("Updated day: " + day);
+                item.setName(name);
+            }
+        }
+        //todo: Update DB with correct name.
     }
 
     public static void main(String[] args) {
