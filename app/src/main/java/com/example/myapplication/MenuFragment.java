@@ -110,8 +110,6 @@ public class MenuFragment extends Fragment implements RecyclerViewInterface {
 
         //Toast.makeText(context, "Amount can not be grater than invoice", Toast.LENGTH_SHORT).show();
 
-        // Todo: Create activity / Fragment to display the information and allow for editing.
-
     }
 
     @Override

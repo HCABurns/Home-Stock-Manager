@@ -55,6 +55,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
+            android:background="#000000"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="#FFFFFF"
             app:menu="@menu/nav_items" />
 
     </LinearLayout>
