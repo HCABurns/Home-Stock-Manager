@@ -4,6 +4,12 @@
     <string name="title">Personal Stock Checker</string>
     <string name="search">Search</string>
 
+    <string name="welcome"><b>Welcome to the Personal Stock Manager!</b></string>
+    <string name="desc">This is a personal stock manager app. The purpose of this app
+    is to help to reduce the amount of wasted food consumed by keeping inventory of items.
+    Additionally, there is a menu section that will allow for a week of meals to be planned which
+    will further help to reduce food waste.</string>
+
     <string name="menu_search">Search</string>
 
     <string name="search_item">Search</string>

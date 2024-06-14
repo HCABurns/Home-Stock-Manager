@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
@@ -120,7 +121,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             public void onClick(View view) {
                 item.setCount(item.getCount()+1);
                 itemCountTextView.setText(String.valueOf(item.getCount()));
-                //Update DB here
+                //todo Update DB here
             }
         });
         remove_button.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +132,11 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
                     item.setCount(count - 1);
                     itemCountTextView.setText(String.valueOf(item.getCount()));
                 }
-                //Update DB here
+                else{
+                    Toast.makeText(view.getContext(), "Can't have less than 0 stock!",
+                            Toast.LENGTH_SHORT).show();
+                }
+                //todo Update DB here
             }
         });
 

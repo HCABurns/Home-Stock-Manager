@@ -2,12 +2,12 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <!-- we define background color -->
-    <solid android:color="@color/black" />
+    <solid android:color="#D5D3D3" />
 
     <!-- we define border color and thick -->
     <stroke
         android:width="3dp"
-        android:color="@color/white" />
+        android:color="@color/black" />
 
     <!-- add some padding for text inside -->
     <padding
@@ -17,6 +17,6 @@
         android:top="15dp" />
 
     <!-- we define corner radius, note that radius can be different for each corner -->
-    <corners android:radius="30dp" />
+    <corners android:radius="15dp" />
 
 </shape>
