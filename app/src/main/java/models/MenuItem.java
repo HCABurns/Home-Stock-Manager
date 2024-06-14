@@ -10,7 +10,7 @@ public class MenuItem {
     private String name;
     private Day day;
     public enum Day{MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}
-    public HashMap<Day,String> dayStringHashMap = new HashMap<Day,String>(){{
+    public static HashMap<Day,String> dayStringHashMap = new HashMap<Day,String>(){{
         put(Day.MONDAY , "Monday");
         put(Day.TUESDAY , "Tuesday");
         put(Day.WEDNESDAY , "Wednesday");

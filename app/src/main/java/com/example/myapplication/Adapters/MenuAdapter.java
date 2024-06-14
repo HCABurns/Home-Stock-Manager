@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Interfaces.RecyclerViewInterface;
@@ -94,8 +95,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
         // contents of the view with that element
         MenuItem item = items.get(position);
         viewHolder.getName_view().setText(String.valueOf(item.getName()));
-        viewHolder.getDay_view().setText(item.dayStringHashMap.get(item.getDay()));
-
+        viewHolder.getDay_view().setText(MenuItem.dayStringHashMap.get(item.getDay()));
     }
 
     @Override

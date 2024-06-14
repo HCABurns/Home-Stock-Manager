@@ -39,6 +39,8 @@ public class MenuFragment extends Fragment implements RecyclerViewInterface {
 
     private ArrayList<MenuItem> items;
 
+    private RecyclerView recyclerView;
+
     private dbHelper dbHelper = new dbHelper();
 
     // TODO: Rename and change types of parameters
@@ -84,8 +86,8 @@ public class MenuFragment extends Fragment implements RecyclerViewInterface {
 
         System.out.println("OPENING THE MENU PAGE -----------------------------");
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.menu_recycler);
-        items = dbHelper.getMenuItems();
+        recyclerView = view.findViewById(R.id.menu_recycler);
+        items = MainActivity.dbHelper.getMenuItems();
         MenuAdapter adapter = new MenuAdapter(items,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
@@ -99,16 +101,23 @@ public class MenuFragment extends Fragment implements RecyclerViewInterface {
         Intent intent = new Intent(getContext(), SingleMenuItemFragment.class);//MenuItem.class);
 
         intent.putExtra("Name" , items.get(position).getName());
+        System.out.println("ITEM TO PUT INTO INTENT IS: " + items.get(position).getDay());
+        intent.putExtra("Day" , MenuItem.dayStringHashMap.get(items.get(position).getDay()));
 
-        System.out.println("Test: " + position);
+        startActivity(intent);
 
-        //startActivity(intent);
+        //System.out.println(context);
 
-        System.out.println(context);
-
-        Toast.makeText(context, "Amount can not be grater than invoice", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Amount can not be grater than invoice", Toast.LENGTH_SHORT).show();
 
         // Todo: Create activity / Fragment to display the information and allow for editing.
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //This will update the recycler view.
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
