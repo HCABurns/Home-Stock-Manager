@@ -1,25 +1,19 @@
 package com.example.myapplication.Adapters;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Interfaces.RecyclerViewInterface;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.comparators.MenuItemComparator;
 
 import java.util.ArrayList;
 
-import models.MenuItem;
+import com.example.myapplication.models.MenuItem;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 

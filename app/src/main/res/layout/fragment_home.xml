@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".HomeFragment">
+    tools:context=".Fragments.HomeFragment">
 
 
     <ImageView
@@ -20,7 +20,6 @@
         android:src="@drawable/stock"
         app:layout_constraintBottom_toTopOf="@+id/home_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,22 +27,22 @@
         android:id="@+id/home_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/title"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/home_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/home_desc"
-        android:layout_width="336dp"
-        android:layout_height="173dp"
+        android:layout_width="333dp"
+        android:layout_height="224dp"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="42dp"
         android:foregroundGravity="center_vertical|center"
         android:gravity="center_vertical"

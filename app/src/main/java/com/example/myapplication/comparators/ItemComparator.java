@@ -2,7 +2,7 @@ package com.example.myapplication.comparators;
 
 import java.util.Comparator;
 
-import models.Item;
+import com.example.myapplication.models.Item;
 
 /**
  * This class is a custom comparator used for comparing two items.

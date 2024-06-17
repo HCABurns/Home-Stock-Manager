@@ -10,6 +10,12 @@
     Additionally, there is a menu section that will allow for a week of meals to be planned which
     will further help to reduce food waste.</string>
 
+    <string name="menu_activity_title"><b>Menu Changer</b></string>
+    <string name="menu_changer_desc"> This will allow you to change the meal title for the
+        day selected. Simply click and edit the text box to the new meal name and then
+        press the update button. </string>
+    <string name="menu_item_name"><u>Meal name: </u></string>
+
     <string name="menu_search">Search</string>
 
     <string name="search_item">Search</string>

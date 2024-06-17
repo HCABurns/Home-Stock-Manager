@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -6,14 +6,19 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
-import com.example.myapplication.Adapters.ViewAdapter;
+import com.example.myapplication.Fragments.AddFragment;
+import com.example.myapplication.Fragments.HomeFragment;
+import com.example.myapplication.Fragments.MenuFragment;
+import com.example.myapplication.R;
+import com.example.myapplication.Fragments.SearchFragment;
+import com.example.myapplication.Fragments.ViewFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import database.dbHelper;
+import com.example.myapplication.database.dbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static database.dbHelper dbHelper = new dbHelper();
+    public static com.example.myapplication.database.dbHelper dbHelper = new dbHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
             else if (item.getItemId() == R.id.Add){
+
+                //todo: Start and activity - Get name and create object (0 stock and required
+                // by default)   --- No fragment as it seems unnecessary.
+
+                //todo - Create skeletons: Activity class, activity xml, dbHelper add new item
+                // checker to see if name is already in database?
 
                 getSupportFragmentManager()
                         .beginTransaction()

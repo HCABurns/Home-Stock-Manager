@@ -1,4 +1,4 @@
-package models;
+package com.example.myapplication.models;
 
 /**
  * This class is used to hold information regarding an item.

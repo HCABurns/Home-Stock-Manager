@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Fragments;
 
 import android.os.Bundle;
 
@@ -11,11 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.Adapters.ViewAdapter;
+import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-import database.dbHelper;
-import models.Item;
+import com.example.myapplication.database.dbHelper;
+import com.example.myapplication.models.Item;
 
 /**
  * A simple {@link Fragment} subclass.

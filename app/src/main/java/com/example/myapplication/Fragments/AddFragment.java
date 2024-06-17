@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Fragments;
 
 import android.os.Bundle;
 
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.Adapters.ViewAdapter;
+import com.example.myapplication.R;
 
 public class AddFragment extends Fragment {
 

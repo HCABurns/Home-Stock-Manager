@@ -19,7 +19,7 @@ import com.example.myapplication.comparators.ItemComparator;
 
 import java.util.ArrayList;
 
-import models.Item;
+import com.example.myapplication.models.Item;
 
 
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {

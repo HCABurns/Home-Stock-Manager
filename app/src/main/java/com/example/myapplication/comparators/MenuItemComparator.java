@@ -2,7 +2,7 @@ package com.example.myapplication.comparators;
 
 import java.util.Comparator;
 
-import models.MenuItem;
+import com.example.myapplication.models.MenuItem;
 
 public class MenuItemComparator implements Comparator<MenuItem> {
     @Override
