@@ -1,15 +1,14 @@
-package database;
+package com.example.myapplication.database;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import models.Item;
-import models.MenuItem;
+import com.example.myapplication.models.Item;
+import com.example.myapplication.models.MenuItem;
 
 /**
- * This class is the database helper class. It is used to store, add and update
- * items in the database.
+ * This class is the com.example.myapplication.database helper class. It is used to store, add and update
+ * items in the com.example.myapplication.database.
  */
 public class dbHelper {
 
@@ -22,7 +21,7 @@ public class dbHelper {
     }
 
     /**
-     * This function will return an ArrayList of Items retrieved from the database.
+     * This function will return an ArrayList of Items retrieved from the com.example.myapplication.database.
      * @return an ArrayList of Items that have been retrieved and put into an object.
      */
     public ArrayList<Item> getItems(){
@@ -34,8 +33,8 @@ public class dbHelper {
 
     public void setItems(){
 
-        //Todo: Get items fro database - Convert to item objects - Add to items arraylist.
-        System.out.println("Getting items from database.");
+        //Todo: Get items fro com.example.myapplication.database - Convert to item objects - Add to items arraylist.
+        System.out.println("Getting items from com.example.myapplication.database.");
         Item item = new Item("Cheese",2, Item.Type.OTHER,false);
         Item item2 = new Item("Apple",0, Item.Type.FRUIT,true);
         Item item3 = new Item("Chicken Wings",1, Item.Type.MEAT,false);
@@ -59,7 +58,7 @@ public class dbHelper {
         menuItems.add(new MenuItem("Chicken wings with egg fried rice and salad", MenuItem.Day.FRIDAY)) ;
         menuItems.add(new MenuItem("Chicken and Rice", MenuItem.Day.TUESDAY)) ;
 
-        //Simulate getting information from the database and altering it.
+        //Simulate getting information from the com.example.myapplication.database and altering it.
         //O(n*2) is fine solution considering max it can be is O(49) which is incredible small.
         String name = "Chicken and Wedges";
         MenuItem.Day day = MenuItem.Day.WEDNESDAY;

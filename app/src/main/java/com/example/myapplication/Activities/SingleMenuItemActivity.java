@@ -1,25 +1,23 @@
-package com.example.myapplication;
+package com.example.myapplication.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import models.MenuItem;
+import com.example.myapplication.OnSwipeTouchListener;
+import com.example.myapplication.R;
 
-public class SingleMenuItemFragment extends AppCompatActivity {
-
-    private MenuItem item;
+public class SingleMenuItemActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,14 +27,13 @@ public class SingleMenuItemFragment extends AppCompatActivity {
         // TODO: Use the ViewModel
 
         String name = getIntent().getStringExtra("Name");
-        TextView nameTextView = findViewById(R.id.single_item_name);
         EditText nameEditText = findViewById(R.id.edit_menu_name);
-        System.out.println(name + " " + nameTextView);
         nameEditText.setText(name);
-        nameTextView.setText(name);
 
         String day = getIntent().getStringExtra("Day");
         System.out.println("DAY GOT FROM THE INTENT IS: " + day);
+        TextView title = findViewById(R.id.menu_title);
+        title.setText(day);
 
 
         AppCompatButton edit_button = findViewById(R.id.menu_update_button);
@@ -50,6 +47,14 @@ public class SingleMenuItemFragment extends AppCompatActivity {
                 //Update DB here
 
                 //End activity
+                finish();
+            }
+        });
+
+        ConstraintLayout layout = findViewById(R.id.singe_menu_item_container);
+        layout.setOnTouchListener(new OnSwipeTouchListener(getBaseContext()) {
+            @Override
+            public void onSwipeRight() {
                 finish();
             }
         });

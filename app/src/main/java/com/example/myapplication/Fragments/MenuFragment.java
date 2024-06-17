@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.example.myapplication.Activities.MainActivity;
+import com.example.myapplication.Activities.SingleMenuItemActivity;
 import com.example.myapplication.Adapters.MenuAdapter;
-import com.example.myapplication.Adapters.ViewAdapter;
 import com.example.myapplication.Interfaces.RecyclerViewInterface;
+import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-import database.dbHelper;
-import models.Item;
-import models.MenuItem;
+import com.example.myapplication.database.dbHelper;
+import com.example.myapplication.models.MenuItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,7 +98,7 @@ public class MenuFragment extends Fragment implements RecyclerViewInterface {
     @Override
     public void onItemClick(int position) {
 
-        Intent intent = new Intent(getContext(), SingleMenuItemFragment.class);//MenuItem.class);
+        Intent intent = new Intent(getContext(), SingleMenuItemActivity.class);//MenuItem.class);
 
         intent.putExtra("Name" , items.get(position).getName());
         System.out.println("ITEM TO PUT INTO INTENT IS: " + items.get(position).getDay());
