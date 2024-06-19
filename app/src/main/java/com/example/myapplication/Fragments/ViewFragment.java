@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myapplication.Activities.MainActivity;
 import com.example.myapplication.Adapters.ViewAdapter;
 import com.example.myapplication.R;
 
@@ -30,7 +31,7 @@ public class ViewFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private dbHelper dbHelper = new dbHelper();
+    private dbHelper dbHelper = MainActivity.dbHelper;
 
     // TODO: Rename and change types of parameters
     private String name;
