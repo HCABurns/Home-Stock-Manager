@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.myapplication.Fragments.AddFragment;
@@ -65,11 +66,14 @@ public class MainActivity extends AppCompatActivity {
                 //todo - Create skeletons: Activity class, activity xml, dbHelper add new item
                 // checker to see if name is already in database?
 
-                getSupportFragmentManager()
+                /*getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, addFragment)
                         .commit();
-                return true;
+                 */
+                Intent intent = new Intent(this, AddItemActivity.class);
+                startActivity(intent);
+                return false;
             }
             else if (item.getItemId() == R.id.search_nav_bar){
 

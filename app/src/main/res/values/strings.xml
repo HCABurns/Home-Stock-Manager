@@ -16,6 +16,11 @@
         press the update button. </string>
     <string name="menu_item_name"><u>Meal name: </u></string>
 
+    <string name="item_add_title">Add New Item</string>
+    <string name="item_add_desc">This will allow you to add new items to the items list. Simply
+    enter the name of the item you wish to add and press the add button.</string>
+    <string name="item_name_label">Item Name: </string>
+
     <string name="menu_search">Search</string>
 
     <string name="search_item">Search</string>
@@ -37,7 +42,6 @@
     <string name="update"> Update </string>
 
 
-
     <string name="name_title"> <u>Name</u> </string>
     <string name="quantity_title"> <u>Quantity</u> </string>
     <string name="required_title"> <u>Required</u> </string>
@@ -45,10 +49,5 @@
 
     <string name="menu_name"> Menu name </string>
     <string name="menu_day"> Menu day </string>
-
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="view_tester">VIEW TESTER</string>
 
 </resources>

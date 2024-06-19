@@ -79,6 +79,16 @@ public class dbHelper {
         //todo: Update DB with correct name.
     }
 
+    public void addItem(String name){
+        Item item = new Item(name,0, Item.Type.OTHER,Boolean.TRUE);
+        this.items.add(item);
+    }
+
+
+    public void itemSort(){
+
+    }
+
     public static void main(String[] args) {
 
 
