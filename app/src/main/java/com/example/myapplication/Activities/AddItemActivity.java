@@ -3,11 +3,14 @@ package com.example.myapplication.Activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 
+import com.example.myapplication.OnSwipeTouchListener;
 import com.example.myapplication.R;
 import com.example.myapplication.comparators.ItemComparator;
 
@@ -22,7 +25,6 @@ public class AddItemActivity extends AppCompatActivity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("--------------------------------------------------------");
 
                 EditText nameEditText = findViewById(R.id.item_name);
                 String name = String.valueOf(nameEditText.getText());
@@ -35,7 +37,15 @@ public class AddItemActivity extends AppCompatActivity {
                 finish();
                 //Sort the array to keep the output correct.
                 MainActivity.dbHelper.items.sort(new ItemComparator());
+                Toast.makeText(getBaseContext(),"Item Successful added!",Toast.LENGTH_LONG).show();
+            }
+        });
 
+        ConstraintLayout layout = findViewById(R.id.add_item_container);
+        layout.setOnTouchListener(new OnSwipeTouchListener(getBaseContext()) {
+            @Override
+            public void onSwipeRight() {
+                finish();
             }
         });
 
