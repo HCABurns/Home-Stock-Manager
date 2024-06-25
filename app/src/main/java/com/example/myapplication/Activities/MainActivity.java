@@ -59,13 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
             else if (item.getItemId() == R.id.Add){
-
-                //todo: Start and activity - Get name and create object (0 stock and required
-                // by default)   --- No fragment as it seems unnecessary.
-
-                //todo - Create skeletons: Activity class, activity xml, dbHelper add new item
-                // checker to see if name is already in database?
-
                 /*getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, addFragment)

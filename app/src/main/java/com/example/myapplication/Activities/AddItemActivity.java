@@ -33,11 +33,13 @@ public class AddItemActivity extends AppCompatActivity {
                 MainActivity.dbHelper.itemSort();
                 //todo: Update DB here
 
+
+                //Sort the array to keep the output correct.
+                //MainActivity.dbHelper.items.sort(new ItemComparator());
+                Toast.makeText(getBaseContext(),"Item Successful added!",Toast.LENGTH_LONG).show();
+
                 //End activity
                 finish();
-                //Sort the array to keep the output correct.
-                MainActivity.dbHelper.items.sort(new ItemComparator());
-                Toast.makeText(getBaseContext(),"Item Successful added!",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -48,7 +50,6 @@ public class AddItemActivity extends AppCompatActivity {
                 finish();
             }
         });
-
 
     }
 }

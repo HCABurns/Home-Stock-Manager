@@ -32,6 +32,7 @@ public class ViewFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private dbHelper dbHelper = MainActivity.dbHelper;
+    private RecyclerView recyclerView;// = getView().findViewById(R.id.view_all);
 
     // TODO: Rename and change types of parameters
     private String name;
@@ -76,12 +77,26 @@ public class ViewFragment extends Fragment {
         //Toast.makeText(getActivity(), "Hello this is a test", Toast.LENGTH_SHORT).show();
         System.out.println("OPENING THE VIEW PAGE -----------------------------");
         View view = inflater.inflate(R.layout.fragment_view, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.view_all);
+        updateRecycler(view);
+        return view;
+    }
+
+
+    public void updateRecycler(View view){
+
         ArrayList<Item> items = dbHelper.getItems();
         ViewAdapter adapter = new ViewAdapter(items);
+        recyclerView = view.findViewById(R.id.view_all);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
-        return view;
+    }
+
+    @Override
+    public void onResume() {
+        System.out.println("RESUMEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+        super.onResume();
+        //This will update the recycler view.
+        updateRecycler(getView());
     }
 }
