@@ -102,13 +102,13 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
                 if (isChecked){
                     layout = ContextCompat.getDrawable(viewHolder.itemView.getContext(),
                             R.drawable.rounded_layout_red);
-                    //Update DB here
+                    //todo: Update DB here
                     item.setRequired(true);
                 }
                 else{
                     layout = ContextCompat.getDrawable(viewHolder.itemView.getContext(),
                             R.drawable.rounded_layout);
-                    //Update DB here
+                    //todo: Update DB here
                     item.setRequired(false);
                 }
                 viewHolder.itemView.findViewById(R.id.item_container).setBackground(layout);
@@ -121,7 +121,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             public void onClick(View view) {
                 item.setCount(item.getCount()+1);
                 itemCountTextView.setText(String.valueOf(item.getCount()));
-                //todo Update DB here
+                //todo: Update DB here
             }
         });
         remove_button.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +136,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
                     Toast.makeText(view.getContext(), "Can't have less than 0 stock!",
                             Toast.LENGTH_SHORT).show();
                 }
-                //todo Update DB here
+                //todo: Update DB here
             }
         });
 
