@@ -10,6 +10,7 @@
     tools:layout_editor_absoluteY="-61dp">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:nestedScrollingEnabled="false"
         android:id="@+id/view_all"
         android:layout_width="0dp"
         android:layout_height="0dp"

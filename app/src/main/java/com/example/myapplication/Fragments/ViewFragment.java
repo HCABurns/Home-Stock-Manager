@@ -14,89 +14,77 @@ import com.example.myapplication.Activities.MainActivity;
 import com.example.myapplication.Adapters.ViewAdapter;
 import com.example.myapplication.R;
 
-import java.util.ArrayList;
-
 import com.example.myapplication.database.dbHelper;
-import com.example.myapplication.models.Item;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ViewFragment#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class ViewFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private dbHelper dbHelper = MainActivity.dbHelper;
-    private RecyclerView recyclerView;// = getView().findViewById(R.id.view_all);
-
-    // TODO: Rename and change types of parameters
-    private String name;
-    private String amount;
+    private RecyclerView recyclerView;
+    private final ViewAdapter adapter = new ViewAdapter();
 
     public ViewFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ViewFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ViewFragment newInstance(String param1, String param2) {
-        ViewFragment fragment = new ViewFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            name = getArguments().getString(ARG_PARAM1);
-            amount = getArguments().getString(ARG_PARAM2);
-        }
     }
 
+
+    /**
+     * This function will create a view for the viewing of items.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return Returns view including all required items.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        //Toast.makeText(getActivity(), "Hello this is a test", Toast.LENGTH_SHORT).show();
         System.out.println("OPENING THE VIEW PAGE -----------------------------");
         View view = inflater.inflate(R.layout.fragment_view, container, false);
-        updateRecycler(view);
+
+        //Set recycler view and run the update to add items.
+        recyclerView = view.findViewById(R.id.view_all);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
+                LinearLayoutManager.VERTICAL, false));
+        updateRecycler();
         return view;
     }
 
 
-    public void updateRecycler(View view){
-
-        ArrayList<Item> items = dbHelper.getItems();
-        ViewAdapter adapter = new ViewAdapter(items);
-        recyclerView = view.findViewById(R.id.view_all);
+    /**
+     *This function will update the recycler view. It will get the new updated list from the adapter
+     * (the adapter calls get_items from the dbHelper class.) then it will set the new updated
+     * adapter to the view.
+     */
+    public void updateRecycler(){
+        adapter.update_items();
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
-                LinearLayoutManager.VERTICAL, false));
     }
 
+
+    /**
+     * This function runs when the view page is resumed. This occurs when the page is reloaded
+     * either by selecting it by the navigation menu or once the add item activity ends and the user
+     * was on the view page when they selected it.
+     */
     @Override
     public void onResume() {
-        System.out.println("RESUMEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+        System.out.println("Resumed View Page ------------------------------");
         super.onResume();
         //This will update the recycler view.
-        updateRecycler(getView());
+        updateRecycler();
     }
 }
