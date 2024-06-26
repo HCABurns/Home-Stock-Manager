@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.myapplication.Fragments.AddFragment;
 import com.example.myapplication.Fragments.HomeFragment;
 import com.example.myapplication.Fragments.MenuFragment;
 import com.example.myapplication.R;
@@ -19,7 +18,7 @@ import com.example.myapplication.database.dbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static com.example.myapplication.database.dbHelper dbHelper = new dbHelper();
+    public static dbHelper dbHelper = new dbHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         Fragment homeFragment = new HomeFragment();
         //Set fragments to be used
         Fragment viewFragment = new ViewFragment();
-        Fragment addFragment = new AddFragment();
         Fragment searchFragment = new SearchFragment();
         Fragment menuFragment = new MenuFragment(getBaseContext());
 
@@ -50,20 +48,9 @@ public class MainActivity extends AppCompatActivity {
                         .beginTransaction()
                         .replace(R.id.fragment_container, viewFragment)
                         .commit();
-                //List all the items
-                //RecyclerView recyclerView = findViewById(R.id.view_all);
-                //ArrayList<Item> items = dbHelper.getItems();
-                //ViewAdapter adapter = new ViewAdapter(items);
-                //recyclerView.setAdapter(adapter);
-                //recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 return true;
             }
             else if (item.getItemId() == R.id.Add){
-                /*getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, addFragment)
-                        .commit();
-                 */
                 Intent intent = new Intent(this, AddItemActivity.class);
                 startActivity(intent);
                 return false;
@@ -88,23 +75,5 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        //FrameLayout frameLayout = findViewById(R.id.frame);
-
-
-
     }
-
 }
-
-/*Switch onOffSwitch;
-        onOffSwitch = (Switch) findViewById(R.id.switch1);
-        onOffSwitch.setBackgroundColor(Color.BLACK);
-
-        onOffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onOffSwitch.setBackgroundColor(Color.GREEN);
-            }
-        });
-        */

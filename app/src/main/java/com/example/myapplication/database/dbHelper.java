@@ -3,6 +3,7 @@ package com.example.myapplication.database;
 
 import java.util.ArrayList;
 
+import com.example.myapplication.comparators.ItemComparator;
 import com.example.myapplication.models.Item;
 import com.example.myapplication.models.MenuItem;
 
@@ -21,19 +22,26 @@ public class dbHelper {
     }
 
     /**
-     * This function will return an ArrayList of Items retrieved from the com.example.myapplication.database.
+     * This function will return an ArrayList of Items retrieved from the database.
      * @return an ArrayList of Items that have been retrieved and put into an object.
      */
     public ArrayList<Item> getItems(){
+        this.itemSort();
         return this.items;
     }
+
+
+    /**
+     * This function will return an ArrayList of MenuItems retrieved from the database.
+     * @return an ArrayList of MenuItems that have been retrieved and put into an object.
+     */
     public ArrayList<MenuItem> getMenuItems(){
         return this.menuItems;
     }
 
     public void setItems(){
 
-        //Todo: Get items fro com.example.myapplication.database - Convert to item objects - Add to items arraylist.
+        //Todo: Get items fro database - Convert to item objects - Add to items arraylist.
         System.out.println("Getting items from com.example.myapplication.database.");
         Item item = new Item("Cheese",2, Item.Type.OTHER,false);
         Item item2 = new Item("Apple",0, Item.Type.FRUIT,true);
@@ -49,6 +57,7 @@ public class dbHelper {
     }
 
     public void setMenuItems() {
+        //Todo: Get items fro database
         menuItems.add(new MenuItem("", MenuItem.Day.MONDAY)) ;
         menuItems.add(new MenuItem("", MenuItem.Day.WEDNESDAY)) ;
         menuItems.add(new MenuItem("", MenuItem.Day.THURSDAY)) ;
@@ -79,20 +88,21 @@ public class dbHelper {
         //todo: Update DB with correct name.
     }
 
+
+    /**
+     * This function will add an Item object to the database.
+     */
     public void addItem(String name){
         Item item = new Item(name,0, Item.Type.OTHER,Boolean.TRUE);
         this.items.add(item);
+        //todo: update db
     }
 
 
+    /**
+     * This function will sort the items arrayList using the custom item comparator.
+     */
     public void itemSort(){
-
+       this.items.sort(new ItemComparator());
     }
-
-    public static void main(String[] args) {
-
-
-
-    }
-
 }
