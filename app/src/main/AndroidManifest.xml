@@ -19,6 +19,9 @@
             android:name=".Activities.SingleMenuItemActivity"
             android:exported="false" />
         <activity
+        android:name=".Activities.SingleItemActivity"
+        android:exported="false" />
+        <activity
             android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>

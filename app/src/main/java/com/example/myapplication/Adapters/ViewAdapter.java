@@ -1,14 +1,15 @@
 package com.example.myapplication.Adapters;
 
 
+import static androidx.core.content.ContextCompat.startActivity;
 import static com.example.myapplication.Activities.MainActivity.dbHelper;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +18,10 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Activities.SingleItemActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.comparators.ItemComparator;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 import com.example.myapplication.models.Item;
 
@@ -29,7 +29,6 @@ import com.example.myapplication.models.Item;
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
 
     private ArrayList<Item> items;
-
     /**
      * Provide a reference to the views, switches and Item used for an item row.
      */
@@ -37,6 +36,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
         private final SwitchCompat required_switch;
         private final TextView itemCountTextView;
         private final TextView itemNameTextView;
+        private final LinearLayout itemContainer;
         private Item item;
 
         public ViewHolder(View view) {
@@ -47,8 +47,18 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             AppCompatButton reduce_button = view.findViewById(R.id.count_remove);
             itemCountTextView = view.findViewById(R.id.menu_name);
             itemNameTextView = view.findViewById(R.id.item_name);
+            itemContainer = view.findViewById(R.id.item_container);
 
             // Define click listeners for the ViewHolder's View
+            itemNameTextView.setOnClickListener(item_view -> {
+                System.out.println("ONCLICK HAS OCCURRED");
+                Intent intent = new Intent(view.getContext(), SingleItemActivity.class);
+                intent.putExtra("name",itemNameTextView.getText());
+                intent.putExtra("quantity",itemCountTextView.getText());
+                startActivity(view.getContext(), intent,null);
+            });
+
+
             required_switch.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 Drawable layout1;
                 if (isChecked){
