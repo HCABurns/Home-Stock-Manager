@@ -58,7 +58,6 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
                 startActivity(view.getContext(), intent,null);
             });
 
-
             required_switch.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 Drawable layout1;
                 if (isChecked){
@@ -77,27 +76,21 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             });
 
             add_button.setOnClickListener(add_view -> {
-                item.setCount(item.getCount()+1);
+                dbHelper.editItem(item.getName(),item.getName(),item.getCount()+1);
                 itemCountTextView.setText(String.valueOf(item.getCount()));
-                //todo: Update DB here
             });
 
-            reduce_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int count = item.getCount();
-                    if (count != 0) {
-                        item.setCount(count - 1);
-                        itemCountTextView.setText(String.valueOf(item.getCount()));
-                    }
-                    else{
-                        Toast.makeText(view.getContext(), "Can't have less than 0 stock!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    //todo: Update DB here
+            reduce_button.setOnClickListener(reduce_view -> {
+                int count = item.getCount();
+                if (count != 0) {
+                    dbHelper.editItem(item.getName(),item.getName(),item.getCount()-1);
+                    itemCountTextView.setText(String.valueOf(item.getCount()));
+                }
+                else{
+                    Toast.makeText(reduce_view.getContext(), "Can't have less than 0 stock!",
+                            Toast.LENGTH_SHORT).show();
                 }
             });
-
         }
     }
 

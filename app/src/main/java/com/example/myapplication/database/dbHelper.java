@@ -78,6 +78,18 @@ public class dbHelper {
         }
     }
 
+
+    public int getItemPos(String name){
+
+        for (int pos = 0; pos<items.size();pos++){
+            if (items.get(pos).getName().equals(name)){
+                return pos;
+            }
+        }
+        return -1;
+    }
+
+
     public void editMenuItem(String day, String name){
         for (MenuItem item : menuItems) {
             if (day.equals(MenuItem.dayStringHashMap.get(item.getDay()))){
@@ -86,6 +98,15 @@ public class dbHelper {
             }
         }
         //todo: Update DB with correct name.
+    }
+
+
+    public void editItem(String originalName, String name, int quantity){
+        int pos = getItemPos(originalName);
+        Item item = items.get(pos);
+        item.setName(name);
+        item.setCount(quantity);
+        //todo update the database item
     }
 
 
