@@ -4,6 +4,7 @@ package com.example.myapplication.Adapters;
 import static androidx.core.content.ContextCompat.startActivity;
 import static com.example.myapplication.Activities.MainActivity.dbHelper;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -18,12 +19,15 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Activities.MainActivity;
 import com.example.myapplication.Activities.SingleItemActivity;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
 import com.example.myapplication.models.Item;
+
+import org.w3c.dom.Text;
 
 
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
@@ -32,11 +36,10 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
     /**
      * Provide a reference to the views, switches and Item used for an item row.
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private final SwitchCompat required_switch;
         private final TextView itemCountTextView;
         private final TextView itemNameTextView;
-        private final LinearLayout itemContainer;
         private Item item;
 
         public ViewHolder(View view) {
@@ -47,15 +50,49 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             AppCompatButton reduce_button = view.findViewById(R.id.count_remove);
             itemCountTextView = view.findViewById(R.id.menu_name);
             itemNameTextView = view.findViewById(R.id.item_name);
-            itemContainer = view.findViewById(R.id.item_container);
 
             // Define click listeners for the ViewHolder's View
-            itemNameTextView.setOnClickListener(item_view -> {
+            itemNameTextView.setOnClickListener(view1 -> {
                 System.out.println("ONCLICK HAS OCCURRED");
-                Intent intent = new Intent(view.getContext(), SingleItemActivity.class);
-                intent.putExtra("name",itemNameTextView.getText());
-                intent.putExtra("quantity",itemCountTextView.getText());
-                startActivity(view.getContext(), intent,null);
+                Intent intent = new Intent(view1.getContext(), SingleItemActivity.class);
+                intent.putExtra("name", itemNameTextView.getText());
+                intent.putExtra("quantity", itemCountTextView.getText());
+                startActivity(view1.getContext(), intent, null);
+            });
+
+            itemNameTextView.setOnLongClickListener(view1 -> {
+                Dialog dialog = new Dialog(this.itemCountTextView.getContext());
+                dialog.setContentView(R.layout.delete_diaglog);
+
+                TextView textView = dialog.findViewById(R.id.dialog_help);
+                String text1 = "Are you sure you want to delete ";
+                String item = (String) itemNameTextView.getText();
+                String text2 = " from the list?";
+                String text;
+                if (item.length() > 50){
+                    text = String.format("%s%s...%s", text1, item.substring(0, 60), text2);
+                }
+                else{
+                    text = String.format("%s%s%s", text1, item, text2);
+                }
+                textView.setText(text);
+
+                AppCompatButton yes_button = dialog.findViewById(R.id.yes_button);
+                yes_button.setOnClickListener(view_1 ->{
+                    int pos = getAdapterPosition();
+                    dbHelper.removeItem(pos);
+
+                    notifyItemRemoved(pos);
+                    notifyItemRangeChanged(pos,items.size());
+
+                    dialog.cancel();
+                });
+
+                AppCompatButton no_button = dialog.findViewById(R.id.no_button);
+                no_button.setOnClickListener(view_1 -> dialog.cancel());
+
+                dialog.show();
+                return true;
             });
 
             required_switch.setOnCheckedChangeListener((buttonView, isChecked) -> {

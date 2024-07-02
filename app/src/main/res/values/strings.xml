@@ -29,6 +29,11 @@
     <string name="item_quantity_title">Quantity:</string>
     <string name="edit">EDIT</string>
 
+    <string name="item_deletion">ITEM DELETION</string>
+    <string name="item_deletion_help">Are you sure you want to delete … from the list?</string>
+    <string name="item_deletion_yes">YES</string>
+    <string name="item_deletion_no">NO</string>
+
     <string name="menu_search">Search</string>
 
     <string name="search_item">Search</string>

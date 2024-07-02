@@ -120,6 +120,14 @@ public class dbHelper {
     }
 
 
+    public void removeItem(String name){
+        items.remove(getItemPos(name));
+    }
+    public void removeItem(int pos){
+        items.remove(pos);
+    }
+
+
     /**
      * This function will sort the items arrayList using the custom item comparator.
      */
