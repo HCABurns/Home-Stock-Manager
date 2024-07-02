@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +25,6 @@ import com.example.myapplication.R;
 import java.util.ArrayList;
 
 import com.example.myapplication.models.Item;
-
-import org.w3c.dom.Text;
 
 
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
@@ -63,6 +60,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             itemNameTextView.setOnLongClickListener(view1 -> {
                 Dialog dialog = new Dialog(this.itemCountTextView.getContext());
                 dialog.setContentView(R.layout.delete_diaglog);
+                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_corners);
 
                 TextView textView = dialog.findViewById(R.id.dialog_help);
                 String text1 = "Are you sure you want to delete ";
@@ -88,8 +86,13 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
                     dialog.cancel();
                 });
 
+                yes_button.setBackgroundResource(R.drawable.rounded_layout_button_green);
+                yes_button.setTextColor(view.getContext().getResources().getColor(R.color.black));
+
                 AppCompatButton no_button = dialog.findViewById(R.id.no_button);
                 no_button.setOnClickListener(view_1 -> dialog.cancel());
+                no_button.setBackgroundResource(R.drawable.rounded_layout_button_red);
+                no_button.setTextColor(view.getContext().getResources().getColor(R.color.black));
 
                 dialog.show();
                 return true;
