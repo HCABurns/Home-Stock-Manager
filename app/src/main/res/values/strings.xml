@@ -21,6 +21,19 @@
     enter the name of the item you wish to add and press the add button.</string>
     <string name="item_name_label">Item Name: </string>
 
+
+    <string name="item_edit_title">ITEM EDITOR</string>
+    <string name="item_edit_desc">This will allow you to edit or delete an item from the items list.
+        Simply edit the name of the item and press the edit button. Alternatively, press the delete
+        button to remove the item from the list.</string>
+    <string name="item_quantity_title">Quantity:</string>
+    <string name="edit">EDIT</string>
+
+    <string name="item_deletion">ITEM DELETION</string>
+    <string name="item_deletion_help">Are you sure you want to delete … from the list?</string>
+    <string name="item_deletion_yes">YES</string>
+    <string name="item_deletion_no">NO</string>
+
     <string name="menu_search">Search</string>
 
     <string name="search_item">Search</string>
@@ -49,5 +62,6 @@
 
     <string name="menu_name"> Menu name </string>
     <string name="menu_day"> Menu day </string>
+    <string name="type_here">Type here</string>
 
 </resources>

@@ -1,14 +1,15 @@
 package com.example.myapplication.Adapters;
 
 
+import static androidx.core.content.ContextCompat.startActivity;
 import static com.example.myapplication.Activities.MainActivity.dbHelper;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +18,11 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Activities.MainActivity;
+import com.example.myapplication.Activities.SingleItemActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.comparators.ItemComparator;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 import com.example.myapplication.models.Item;
 
@@ -29,11 +30,10 @@ import com.example.myapplication.models.Item;
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
 
     private ArrayList<Item> items;
-
     /**
      * Provide a reference to the views, switches and Item used for an item row.
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private final SwitchCompat required_switch;
         private final TextView itemCountTextView;
         private final TextView itemNameTextView;
@@ -49,6 +49,55 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             itemNameTextView = view.findViewById(R.id.item_name);
 
             // Define click listeners for the ViewHolder's View
+            itemNameTextView.setOnClickListener(view1 -> {
+                System.out.println("ONCLICK HAS OCCURRED");
+                Intent intent = new Intent(view1.getContext(), SingleItemActivity.class);
+                intent.putExtra("name", itemNameTextView.getText());
+                intent.putExtra("quantity", itemCountTextView.getText());
+                startActivity(view1.getContext(), intent, null);
+            });
+
+            itemNameTextView.setOnLongClickListener(view1 -> {
+                Dialog dialog = new Dialog(this.itemCountTextView.getContext());
+                dialog.setContentView(R.layout.delete_diaglog);
+                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_corners);
+
+                TextView textView = dialog.findViewById(R.id.dialog_help);
+                String text1 = "Are you sure you want to delete ";
+                String item = (String) itemNameTextView.getText();
+                String text2 = " from the list?";
+                String text;
+                if (item.length() > 50){
+                    text = String.format("%s%s...%s", text1, item.substring(0, 60), text2);
+                }
+                else{
+                    text = String.format("%s%s%s", text1, item, text2);
+                }
+                textView.setText(text);
+
+                AppCompatButton yes_button = dialog.findViewById(R.id.yes_button);
+                yes_button.setOnClickListener(view_1 ->{
+                    int pos = getAdapterPosition();
+                    dbHelper.removeItem(pos);
+
+                    notifyItemRemoved(pos);
+                    notifyItemRangeChanged(pos,items.size());
+
+                    dialog.cancel();
+                });
+
+                yes_button.setBackgroundResource(R.drawable.rounded_layout_button_green);
+                yes_button.setTextColor(view.getContext().getResources().getColor(R.color.black));
+
+                AppCompatButton no_button = dialog.findViewById(R.id.no_button);
+                no_button.setOnClickListener(view_1 -> dialog.cancel());
+                no_button.setBackgroundResource(R.drawable.rounded_layout_button_red);
+                no_button.setTextColor(view.getContext().getResources().getColor(R.color.black));
+
+                dialog.show();
+                return true;
+            });
+
             required_switch.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 Drawable layout1;
                 if (isChecked){
@@ -67,27 +116,21 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             });
 
             add_button.setOnClickListener(add_view -> {
-                item.setCount(item.getCount()+1);
+                dbHelper.editItem(item.getName(),item.getName(),item.getCount()+1);
                 itemCountTextView.setText(String.valueOf(item.getCount()));
-                //todo: Update DB here
             });
 
-            reduce_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int count = item.getCount();
-                    if (count != 0) {
-                        item.setCount(count - 1);
-                        itemCountTextView.setText(String.valueOf(item.getCount()));
-                    }
-                    else{
-                        Toast.makeText(view.getContext(), "Can't have less than 0 stock!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    //todo: Update DB here
+            reduce_button.setOnClickListener(reduce_view -> {
+                int count = item.getCount();
+                if (count != 0) {
+                    dbHelper.editItem(item.getName(),item.getName(),item.getCount()-1);
+                    itemCountTextView.setText(String.valueOf(item.getCount()));
+                }
+                else{
+                    Toast.makeText(reduce_view.getContext(), "Can't have less than 0 stock!",
+                            Toast.LENGTH_SHORT).show();
                 }
             });
-
         }
     }
 

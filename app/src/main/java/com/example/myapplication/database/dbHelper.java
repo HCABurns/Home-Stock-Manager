@@ -78,6 +78,18 @@ public class dbHelper {
         }
     }
 
+
+    public int getItemPos(String name){
+
+        for (int pos = 0; pos<items.size();pos++){
+            if (items.get(pos).getName().equals(name)){
+                return pos;
+            }
+        }
+        return -1;
+    }
+
+
     public void editMenuItem(String day, String name){
         for (MenuItem item : menuItems) {
             if (day.equals(MenuItem.dayStringHashMap.get(item.getDay()))){
@@ -89,6 +101,15 @@ public class dbHelper {
     }
 
 
+    public void editItem(String originalName, String name, int quantity){
+        int pos = getItemPos(originalName);
+        Item item = items.get(pos);
+        item.setName(name);
+        item.setCount(quantity);
+        //todo update the database item
+    }
+
+
     /**
      * This function will add an Item object to the database.
      */
@@ -96,6 +117,14 @@ public class dbHelper {
         Item item = new Item(name,0, Item.Type.OTHER,Boolean.TRUE);
         this.items.add(item);
         //todo: update db
+    }
+
+
+    public void removeItem(String name){
+        items.remove(getItemPos(name));
+    }
+    public void removeItem(int pos){
+        items.remove(pos);
     }
 
 
