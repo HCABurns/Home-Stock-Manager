@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         //Create the fragments that will be used to change screens
         Fragment homeFragment = new HomeFragment();
         Fragment viewFragment = new ViewFragment();
-        Fragment searchFragment = new SearchFragment();
         Fragment menuFragment = new MenuFragment(getBaseContext());
 
         //Create a fragment manager and swap the empty frame to the home fragment frame.
@@ -55,14 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, AddItemActivity.class);
                 startActivity(intent);
                 return false;
-            }
-            else if (item.getItemId() == R.id.search_nav_bar){
-
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, searchFragment)
-                        .commit();
-                return true;
             }
             else if (item.getItemId() == R.id.menu){
 
