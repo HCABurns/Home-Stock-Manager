@@ -9,12 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.SearchView;
 
-import com.example.myapplication.Activities.MainActivity;
 import com.example.myapplication.Adapters.ViewAdapter;
 import com.example.myapplication.R;
-
-import com.example.myapplication.database.dbHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +21,8 @@ import com.example.myapplication.database.dbHelper;
 public class ViewFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private final ViewAdapter adapter = new ViewAdapter();
+    public static final ViewAdapter adapter = new ViewAdapter();
+    public static SearchView searchView;
 
     public ViewFragment() {
         // Required empty public constructor
@@ -59,7 +59,23 @@ public class ViewFragment extends Fragment {
         recyclerView = view.findViewById(R.id.view_all);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
-        updateRecycler();
+        updateRecycler(null);
+
+        searchView = view.findViewById(R.id.searchbar);
+        // Define click listeners for the ViewHolder's View
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String text){
+                updateRecycler(text);
+                return false;
+            }
+        });
+
         return view;
     }
 
@@ -69,9 +85,9 @@ public class ViewFragment extends Fragment {
      * (the adapter calls get_items from the dbHelper class.) then it will set the new updated
      * adapter to the view.
      */
-    public void updateRecycler(){
-        adapter.update_items();
-        recyclerView.setAdapter(adapter);
+    public void updateRecycler(String filter){
+            adapter.updateItems(filter);
+            recyclerView.setAdapter(adapter);
     }
 
 
@@ -84,7 +100,8 @@ public class ViewFragment extends Fragment {
     public void onResume() {
         System.out.println("Resumed View Page ------------------------------");
         super.onResume();
+        searchView.setQuery(null,false);
         //This will update the recycler view.
-        updateRecycler();
+        updateRecycler(null);
     }
 }

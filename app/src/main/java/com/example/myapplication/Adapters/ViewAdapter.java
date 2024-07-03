@@ -18,8 +18,8 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Activities.MainActivity;
 import com.example.myapplication.Activities.SingleItemActivity;
+import com.example.myapplication.Fragments.ViewFragment;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
      * Provide a reference to the views, switches and Item used for an item row.
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final SwitchCompat required_switch;
+        private final SwitchCompat requiredSwitch;
         private final TextView itemCountTextView;
         private final TextView itemNameTextView;
         private Item item;
@@ -42,13 +42,12 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
         public ViewHolder(View view) {
             super(view);
             // Define parameters
-            required_switch = view.findViewById(R.id.required_switch);
+            requiredSwitch = view.findViewById(R.id.required_switch);
             AppCompatButton add_button = view.findViewById(R.id.count_plus);
             AppCompatButton reduce_button = view.findViewById(R.id.count_remove);
-            itemCountTextView = view.findViewById(R.id.menu_name);
+            itemCountTextView = view.findViewById(R.id.item_count);
             itemNameTextView = view.findViewById(R.id.item_name);
 
-            // Define click listeners for the ViewHolder's View
             itemNameTextView.setOnClickListener(view1 -> {
                 System.out.println("ONCLICK HAS OCCURRED");
                 Intent intent = new Intent(view1.getContext(), SingleItemActivity.class);
@@ -78,12 +77,13 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
                 AppCompatButton yes_button = dialog.findViewById(R.id.yes_button);
                 yes_button.setOnClickListener(view_1 ->{
                     int pos = getAdapterPosition();
-                    dbHelper.removeItem(pos);
+                    dbHelper.removeItem((String) itemNameTextView.getText());
 
                     notifyItemRemoved(pos);
                     notifyItemRangeChanged(pos,items.size());
 
                     dialog.cancel();
+                    updateItems(ViewFragment.searchView.getQuery().toString());
                 });
 
                 yes_button.setBackgroundResource(R.drawable.rounded_layout_button_green);
@@ -98,7 +98,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
                 return true;
             });
 
-            required_switch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            requiredSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 Drawable layout1;
                 if (isChecked){
                     layout1 = ContextCompat.getDrawable(itemView.getContext(),
@@ -169,12 +169,12 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             layout = ContextCompat.getDrawable(viewHolder.itemView.getContext(),
                     R.drawable.rounded_layout_red);
             //Set switch to checked if the item is required.
-            viewHolder.required_switch.setChecked(true);
+            viewHolder.requiredSwitch.setChecked(true);
         }
         else{
             layout = ContextCompat.getDrawable(viewHolder.itemView.getContext(),
                     R.drawable.rounded_layout);
-            viewHolder.required_switch.setChecked(false);
+            viewHolder.requiredSwitch.setChecked(false);
         }
         viewHolder.itemView.findViewById(R.id.item_container).setBackground(layout);
     }
@@ -189,9 +189,21 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
     /**
      * This function will update the items list to the one stored by the dbHelper class.
      */
-    public void update_items(){
+    public void updateItems(String filter){
         this.items = dbHelper.getItems();
+        if (filter != null){
+            filterItems(filter);
+        }
     }
 
 
+    public void filterItems(String filter){
+        ArrayList<Item> filtered = new ArrayList<>();
+        for (Item item : items){
+            if (item.getName().toLowerCase().startsWith(filter.toLowerCase())){
+                filtered.add(item);
+            }
+        }
+        this.items = filtered;
+    }
 }

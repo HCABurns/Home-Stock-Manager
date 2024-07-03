@@ -34,6 +34,8 @@
     <string name="item_deletion_yes">YES</string>
     <string name="item_deletion_no">NO</string>
 
+    <string name="search_hint">Search here…</string>
+
     <string name="menu_search">Search</string>
 
     <string name="search_item">Search</string>
