@@ -31,7 +31,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
             super(view);
 
             day_view = view.findViewById(R.id.menu_day);
-            name_view = view.findViewById(R.id.menu_name);
+            name_view = view.findViewById(R.id.item_count);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

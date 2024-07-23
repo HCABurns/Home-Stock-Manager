@@ -8,4 +8,12 @@
 
 
     </style>
+
+    <style name="searchbar" parent="Widget.AppCompat.SearchView">
+        <!-- Text color -->
+        <item name="android:editTextColor">@color/black</item>
+        <!-- Hint text color -->
+        <item name="android:textColorHint">@color/black</item>
+    </style>
+
 </resources>

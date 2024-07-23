@@ -41,7 +41,7 @@ public class MenuFragment extends Fragment implements RecyclerViewInterface {
 
     private RecyclerView recyclerView;
 
-    private dbHelper dbHelper = new dbHelper();
+    private dbHelper dbHelper = MainActivity.dbHelper;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
