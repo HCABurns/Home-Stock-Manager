@@ -18,7 +18,7 @@ import com.example.myapplication.database.dbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static dbHelper dbHelper = new dbHelper();
+    public static dbHelper dbHelper;
     //Create the fragments that will be used to change screens
 
 
@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //dbHelper = new dbHelper(getBaseContext());
+        dbHelper = new dbHelper();
 
         //Create the fragments that will be used to change screens
         Fragment homeFragment = new HomeFragment();

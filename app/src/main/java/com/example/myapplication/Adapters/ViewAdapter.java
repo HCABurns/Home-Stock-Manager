@@ -104,26 +104,27 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
                     layout1 = ContextCompat.getDrawable(itemView.getContext(),
                             R.drawable.rounded_layout_red);
                     //todo: Update DB here
-                    item.setRequired(true);
+                    dbHelper.editItemRequired(item.getName(),true);
                 }
                 else{
                     layout1 = ContextCompat.getDrawable(itemView.getContext(),
                             R.drawable.rounded_layout);
                     //todo: Update DB here
-                    item.setRequired(false);
+                    dbHelper.editItemRequired(item.getName(),false);
                 }
                 itemView.findViewById(R.id.item_container).setBackground(layout1);
             });
 
             add_button.setOnClickListener(add_view -> {
-                dbHelper.editItem(item.getName(),item.getName(),item.getCount()+1);
+                //dbHelper.editItem(item.getName(),item.getName(),item_count);
+                dbHelper.incrementQuantity(item);
                 itemCountTextView.setText(String.valueOf(item.getCount()));
             });
 
             reduce_button.setOnClickListener(reduce_view -> {
                 int count = item.getCount();
                 if (count != 0) {
-                    dbHelper.editItem(item.getName(),item.getName(),item.getCount()-1);
+                    dbHelper.decrementQuantity(item);
                     itemCountTextView.setText(String.valueOf(item.getCount()));
                 }
                 else{

@@ -1,5 +1,7 @@
 package com.example.myapplication.models;
 
+import java.util.HashMap;
+
 /**
  * This class is used to hold information regarding an item.
  *
@@ -10,16 +12,25 @@ package com.example.myapplication.models;
  * required : Boolean - This is a flag to indicate if the item is required to be bought or not.
  */
 public class Item {
-    private String name;
-    private int count;
-    private Type type;
-    private Boolean required;
+
+    private String id;
+    private String name = "";
+    private int count = 0;
+    private Type type = Type.OTHER;
+    private Boolean required = Boolean.TRUE;
     public enum Type{
         VEGETABLE,
         FRUIT,
         MEAT,
         OTHER
     }
+
+    private final HashMap<String,Type> typeHashMap = new HashMap<String,Type>(){{
+        put("VEGETABLE" , Type.VEGETABLE);
+        put("FRUIT" , Type.FRUIT);
+        put("MEAT" , Type.MEAT);
+        put("OTHER" , Type.OTHER);
+    }};
 
     /**
      * Creates an item object with all the required variables.
@@ -28,12 +39,31 @@ public class Item {
      * @param type Type of the tem.
      * @param required Boolean flag to indicate if the item is required to be bought or not.
      */
-    public Item(String name, int count, Type type, Boolean required){
+    public Item(String id, String name, int count, Type type, Boolean required){
+        this.id = id;
         this.name = name;
         this.count = count;
         this.type = type;
         this.required = required;
     }
+
+    public Item(String id, String name, int count, String type, Boolean required){
+        this.id = id;
+        this.name = name;
+        this.count = count;
+        this.type =  typeHashMap.get(type);
+        this.required = required;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Item(){};
 
 
     /**
@@ -107,12 +137,12 @@ public class Item {
     }
 
     public static void main(String[] args) {
-        Item item = new Item("Cucumber",1, Type.VEGETABLE,false);
-        Item item2 = new Item("Chicken Portions",3,Type.MEAT,false);
-        Item item3 = new Item("Plum Tomatoes",8,Type.VEGETABLE,false);
-        Item item4 = new Item("Yogurt",1,Type.OTHER,false);
+        //Item item = new Item("Cucumber",1, Type.VEGETABLE,false);
+        //Item item2 = new Item("Chicken Portions",3,Type.MEAT,false);
+        //Item item3 = new Item("Plum Tomatoes",8,Type.VEGETABLE,false);
+        //Item item4 = new Item("Yogurt",1,Type.OTHER,false);
 
-        System.out.println(item);
+        //System.out.println(item);
     }
 
 }
