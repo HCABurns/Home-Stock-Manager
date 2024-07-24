@@ -15,6 +15,10 @@ There are several pages that are required for this project, which are as follows
 <b>Menu Page</b>: This is a week planner for meals to further reduce wasted food by allowing extra planning.  
 <b>Menu Edit Page</b>: This will allow for edditing or removing the menu item.
 
+## Menu Removal
+
+To keep the menu planning optimal, a python script was created to clear the name of the menu item at a specific time every day. This has been achieved by using the Task Scheduler program on Windows.
+
 ## To do
 
 - Python script that will delete the menu item at the end of a day.

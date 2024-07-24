@@ -29,3 +29,7 @@ google-services.json
 # Android Profiling
 *.hprof
 app/src/main/java/com/example/myapplication/database/DBInfo.java
+key.json
+dbHelper.py
+__pycache__/dbHelper.cpython-39.pyc
+menu-clearer-script.pyw
