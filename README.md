@@ -14,6 +14,10 @@ There are 5 pages that are required for this project which are: Homepage, view p
 <b>Add Page</b>: A page to add new items to the list.  
 <b>Menu Page</b>: This is a week planner for meals to further reduce wasted food by allowing extra planning.  
 
+## Menu Removal
+
+To keep the menu planning optimal, a python script was created to clear the name of the menu item at a specific time every day. This has been achieved by using the Task Scheduler program on Windows.
+
 ## To do
 
 - Learn the basics of app creation including: fragments, recyclerViews, viewAdapters and page navigation.
