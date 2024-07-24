@@ -1,24 +1,18 @@
 package com.example.myapplication.database;
 
 
-import static android.content.ContentValues.TAG;
-
-import android.content.Context;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import com.example.myapplication.Activities.MainActivity;
 import com.example.myapplication.comparators.ItemComparator;
+import com.example.myapplication.comparators.MenuItemComparator;
 import com.example.myapplication.models.Item;
 import com.example.myapplication.models.MenuItem;
-import com.google.firebase.FirebaseApp;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +31,7 @@ public class dbHelper {
     private FirebaseDatabase firebaseDatabase;
 
     private DatabaseReference items_database;
+    private DatabaseReference menu_database;
     private DatabaseReference id_database;
     private int id_counter = 0;
     //public static Context context;
@@ -44,8 +39,9 @@ public class dbHelper {
 
     public dbHelper(){
         firebaseDatabase = FirebaseDatabase.getInstance(DBInfo.link);
-        items_database = firebaseDatabase.getReference("items");
-        id_database = firebaseDatabase.getReference("id_counter").child("id");
+        items_database = firebaseDatabase.getReference(DBInfo.db_name);
+        menu_database = firebaseDatabase.getReference(DBInfo.db_name3);
+        id_database = firebaseDatabase.getReference(DBInfo.db_name2).child("id");
         id_database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -58,8 +54,6 @@ public class dbHelper {
             }
         });
 
-
-        System.out.println(id_counter);
         System.out.println("-----------------------------------------------------");
 
         //todo: testing
@@ -78,6 +72,15 @@ public class dbHelper {
         //edit item in db
         //mDatabase.child("items").child(item.getName()).child("required").setValue(true);
 
+        /*
+        menu_database.child(String.valueOf(MenuItem.Day.MONDAY)).setValue(new MenuItem("",MenuItem.Day.MONDAY));
+        menu_database.child(String.valueOf(MenuItem.Day.TUESDAY)).setValue(new MenuItem("",MenuItem.Day.TUESDAY));
+        menu_database.child(String.valueOf(MenuItem.Day.WEDNESDAY)).setValue(new MenuItem("",MenuItem.Day.WEDNESDAY));
+        menu_database.child(String.valueOf(MenuItem.Day.THURSDAY)).setValue(new MenuItem("",MenuItem.Day.THURSDAY));
+        menu_database.child(String.valueOf(MenuItem.Day.FRIDAY)).setValue(new MenuItem("",MenuItem.Day.FRIDAY));
+        menu_database.child(String.valueOf(MenuItem.Day.SATURDAY)).setValue(new MenuItem("",MenuItem.Day.SATURDAY));
+        menu_database.child(String.valueOf(MenuItem.Day.SUNDAY)).setValue(new MenuItem("",MenuItem.Day.SUNDAY));
+        */
         //todo: end
 
         setItems();
@@ -148,6 +151,8 @@ public class dbHelper {
 
     public void setMenuItems() {
         //Todo: Get items fro database
+
+        /*
         menuItems.add(new MenuItem("", MenuItem.Day.MONDAY)) ;
         menuItems.add(new MenuItem("", MenuItem.Day.WEDNESDAY)) ;
         menuItems.add(new MenuItem("", MenuItem.Day.THURSDAY)) ;
@@ -156,16 +161,24 @@ public class dbHelper {
         menuItems.add(new MenuItem("Mac and Cheese Balls", MenuItem.Day.SATURDAY)) ;
         menuItems.add(new MenuItem("Chicken wings with egg fried rice and salad", MenuItem.Day.FRIDAY)) ;
         menuItems.add(new MenuItem("Chicken and Rice", MenuItem.Day.TUESDAY)) ;
+         */
 
-        //Simulate getting information from the com.example.myapplication.database and altering it.
-        //O(n*2) is fine solution considering max it can be is O(49) which is incredible small.
-        String name = "Chicken and Wedges";
-        MenuItem.Day day = MenuItem.Day.WEDNESDAY;
-        for (MenuItem item : menuItems){
-            if (item.getDay() == day){
-                item.setName(name);
+        menu_database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                menuItems.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    MenuItem item = ds.getValue(MenuItem.class);
+                    menuItems.add(item);
+                }
+                menuItems.sort(new MenuItemComparator());
             }
-        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
     }
 
 
@@ -185,9 +198,11 @@ public class dbHelper {
             if (day.equals(MenuItem.dayStringHashMap.get(item.getDay()))){
                 System.out.println("Updated day: " + day);
                 item.setName(name);
+                //todo: Update DB with correct name.
+                menu_database.child(String.valueOf(item.getDay())).setValue(item);
             }
         }
-        //todo: Update DB with correct name.
+
     }
 
 

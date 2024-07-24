@@ -63,7 +63,7 @@ public class Item {
         this.id = id;
     }
 
-    public Item(){};
+    public Item(){}
 
 
     /**

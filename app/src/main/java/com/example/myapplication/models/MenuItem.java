@@ -30,6 +30,8 @@ public class MenuItem {
         this.day = day;
     }
 
+    public MenuItem(){}
+
     /**
      * @return String - Name of the dish.
      */

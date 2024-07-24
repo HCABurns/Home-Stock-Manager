@@ -64,6 +64,6 @@
 
     <string name="menu_name"> Menu name </string>
     <string name="menu_day"> Menu day </string>
-    <string name="type_here">Type here</string>
+    <string name="type_here">Type here…</string>
 
 </resources>
