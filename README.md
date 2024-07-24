@@ -19,10 +19,6 @@ There are several pages that are required for this project, which are as follows
 
 To keep the menu planning optimal, a python script was created to clear the name of the menu item at a specific time every day. This has been achieved by using the Task Scheduler program on Windows.
 
-## To do
-
-- Python script that will delete the menu item at the end of a day.
-
 ## To do - After functional app created:
 - Adding item type to be functional with creation.
 - Filter with item types.
