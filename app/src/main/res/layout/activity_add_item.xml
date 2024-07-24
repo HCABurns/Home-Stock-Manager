@@ -21,7 +21,6 @@
         android:id="@+id/add_item_title"
         android:layout_width="413dp"
         android:layout_height="96dp"
-        android:layout_marginBottom="30dp"
         android:background="#000000"
         android:clickable="false"
         android:fontFamily="sans-serif-medium"
@@ -31,12 +30,10 @@
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/item_add_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="AllCaps" />
 
     <EditText
@@ -72,17 +69,19 @@
     <TextView
         android:id="@+id/item_add_desc"
         android:layout_width="351dp"
-        android:layout_height="70dp"
+        android:layout_height="76dp"
         android:layout_marginStart="37dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="37dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="26dp"
         android:text="@string/item_add_desc"
         android:textAlignment="center"
         android:textColor="#2E2E2E"
-        app:layout_constraintBottom_toTopOf="@+id/item_name"
+        app:layout_constraintBottom_toTopOf="@+id/item_name_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.357"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_item_title" />
 
     <TextView
         android:id="@+id/item_name_title"
