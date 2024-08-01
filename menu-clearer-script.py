@@ -2,7 +2,6 @@ from firebase_admin import credentials,db,initialize_app
 from datetime import datetime
 import dbHelper
 
-
 # Fetch the service account key JSON file contents
 cred = credentials.Certificate('key.json')
 # Initialize the app with a service account, granting admin privileges
