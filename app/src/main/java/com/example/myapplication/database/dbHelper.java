@@ -34,9 +34,11 @@ public class dbHelper {
     private DatabaseReference menu_database;
     private DatabaseReference id_database;
     private int id_counter = 0;
-    //public static Context context;
 
 
+    /**
+     * This constructor will connect to the database and fill the items and menu arrays.
+     */
     public dbHelper(){
         firebaseDatabase = FirebaseDatabase.getInstance(DBInfo.link);
         items_database = firebaseDatabase.getReference(DBInfo.db_name);
@@ -53,41 +55,15 @@ public class dbHelper {
                 // ...
             }
         });
-
-        System.out.println("-----------------------------------------------------");
-
-        //todo: testing
-        //Item item = new Item("Cheese",2, Item.Type.OTHER,false);
-        //Item item2 = new Item("Apple",0, Item.Type.FRUIT,true);
-        //Item item3 = new Item("Chicken Wings",1, Item.Type.MEAT,false);
-
-        //remove previous 'item' in db
-        //mDatabase.child("items").child(item.getName()).removeValue();
-
-        //add item to db
-        //mDatabase.child("items").child(item.getName()).setValue(item);
-        //mDatabase.child("items").child(item2.getName()).setValue(item2);
-        //mDatabase.child("items").child(item3.getName()).setValue(item3);
-
-        //edit item in db
-        //mDatabase.child("items").child(item.getName()).child("required").setValue(true);
-
-        /*
-        menu_database.child(String.valueOf(MenuItem.Day.MONDAY)).setValue(new MenuItem("",MenuItem.Day.MONDAY));
-        menu_database.child(String.valueOf(MenuItem.Day.TUESDAY)).setValue(new MenuItem("",MenuItem.Day.TUESDAY));
-        menu_database.child(String.valueOf(MenuItem.Day.WEDNESDAY)).setValue(new MenuItem("",MenuItem.Day.WEDNESDAY));
-        menu_database.child(String.valueOf(MenuItem.Day.THURSDAY)).setValue(new MenuItem("",MenuItem.Day.THURSDAY));
-        menu_database.child(String.valueOf(MenuItem.Day.FRIDAY)).setValue(new MenuItem("",MenuItem.Day.FRIDAY));
-        menu_database.child(String.valueOf(MenuItem.Day.SATURDAY)).setValue(new MenuItem("",MenuItem.Day.SATURDAY));
-        menu_database.child(String.valueOf(MenuItem.Day.SUNDAY)).setValue(new MenuItem("",MenuItem.Day.SUNDAY));
-        */
-        //todo: end
-
         setItems();
         setMenuItems();
     }
 
 
+    /**
+     * Get the id for an item being added to the list.
+     * @return Integer - Integer of the id.
+     */
     public String getID(){
         id_counter += 1;
         id_database.setValue(id_counter);
@@ -114,24 +90,11 @@ public class dbHelper {
         return this.menuItems;
     }
 
+    /**
+     * Fill items arrayList with the items from the database.
+     */
     public void setItems(){
-
-        //Todo: Get items fro database - Convert to item objects - Add to items arraylist.
-        System.out.println("Getting items from com.example.myapplication.database.");
-        /*
-        Item item = new Item("Cheese",2, Item.Type.OTHER,false);
-        Item item2 = new Item("Apple",0, Item.Type.FRUIT,true);
-        Item item3 = new Item("Chicken Wings",1, Item.Type.MEAT,false);
-        System.out.println(items);
-        items.add(item);
-        items.add(item2);
-        items.add(item3);
-        items.add(new Item("Flour",0, Item.Type.OTHER,true));
-        items.add(new Item("Egg",3, Item.Type.OTHER,false));
-        items.add(new Item("Butter",1, Item.Type.OTHER,true));
-        items.add(new Item("Chicken and Onion Pie sliced awdddddd wad awadw awd awawaw awd adwawd ",1, Item.Type.OTHER,true));
-        */
-
+        // Get items from the database and add to items arraylist.
         items_database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -149,20 +112,12 @@ public class dbHelper {
         });
     }
 
+
+    /**
+     * Fill menuitems arrayList with the strings related to menu from the database.
+     */
     public void setMenuItems() {
-        //Todo: Get items fro database
-
-        /*
-        menuItems.add(new MenuItem("", MenuItem.Day.MONDAY)) ;
-        menuItems.add(new MenuItem("", MenuItem.Day.WEDNESDAY)) ;
-        menuItems.add(new MenuItem("", MenuItem.Day.THURSDAY)) ;
-        menuItems.add(new MenuItem("", MenuItem.Day.SUNDAY)) ;
-
-        menuItems.add(new MenuItem("Mac and Cheese Balls", MenuItem.Day.SATURDAY)) ;
-        menuItems.add(new MenuItem("Chicken wings with egg fried rice and salad", MenuItem.Day.FRIDAY)) ;
-        menuItems.add(new MenuItem("Chicken and Rice", MenuItem.Day.TUESDAY)) ;
-         */
-
+        // Add items to the menu arraylist.
         menu_database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -171,6 +126,7 @@ public class dbHelper {
                     MenuItem item = ds.getValue(MenuItem.class);
                     menuItems.add(item);
                 }
+                // Custom sort the menu - Monday -> Sunday
                 menuItems.sort(new MenuItemComparator());
             }
 
@@ -182,8 +138,13 @@ public class dbHelper {
     }
 
 
+    /**
+     * Return the position in the array of a given item name.
+     * @param name - String of the item position to be returned.
+     * @return Integer - Index of the item in the array or -1 if not in the list.
+     */
     public int getItemPos(String name){
-
+        // Get the position of the item.
         for (int pos = 0; pos<items.size();pos++){
             if (items.get(pos).getName().equals(name)){
                 return pos;
@@ -246,30 +207,37 @@ public class dbHelper {
 
     /**
      * This function will add an Item object to the database.
+     * @param name - Name of item to remove from the database.
      */
     public void addItem(String name){
         Item item = new Item(getID() ,name,0, Item.Type.OTHER,Boolean.TRUE);
         this.items.add(item);
-        //todo: update db
+        // Update database.
         items_database.child(item.getId()).setValue(item);
     }
 
-
+    /**
+     * This function will remove an item from the database.
+     * @param name - Name of item to remove from the database.
+     */
     public void removeItem(String name){
-        //todo: update db
         items_database.child(getIDFromName(name)).removeValue();
         items.remove(getItemPos(name));
     }
 
+
+    /**
+     * This function will get the item id given the name string.
+     * @param name - Name of item to remove from the database.
+     */
     public String getIDFromName(String name){
         for (Item item : items){
             System.out.println(item.getName() + " " + name);
             if (Objects.equals(item.getName(), name)){
-                System.out.println("REMOVED " + item.getId());
                 return item.getId();
             }
         }
-        //Unreachable return
+        // Unreachable return - Given valid name.
         return name;
     }
 
