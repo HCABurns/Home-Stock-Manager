@@ -23,7 +23,7 @@ public class ItemComparator implements Comparator<Item> {
             if (item.getCount() > t1.getCount()) {
                 return 1;
             } else if (item.getCount() == t1.getCount()) {
-                return 0;
+                return item.getName().compareToIgnoreCase(t1.getName());
             }
             else{
                 return -1;
