@@ -31,8 +31,6 @@ public class AddItemActivity extends AppCompatActivity {
 
                 MainActivity.dbHelper.addItem(name);
                 MainActivity.dbHelper.itemSort();
-                //todo: Update DB here
-
 
                 //Sort the array to keep the output correct.
                 //MainActivity.dbHelper.items.sort(new ItemComparator());

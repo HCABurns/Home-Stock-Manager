@@ -30,6 +30,7 @@ import com.example.myapplication.models.Item;
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
 
     private ArrayList<Item> items;
+
     /**
      * Provide a reference to the views, switches and Item used for an item row.
      */
@@ -103,13 +104,11 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
                 if (isChecked){
                     layout1 = ContextCompat.getDrawable(itemView.getContext(),
                             R.drawable.rounded_layout_red);
-                    //todo: Update DB here
                     dbHelper.editItemRequired(item.getName(),true);
                 }
                 else{
                     layout1 = ContextCompat.getDrawable(itemView.getContext(),
                             R.drawable.rounded_layout);
-                    //todo: Update DB here
                     dbHelper.editItemRequired(item.getName(),false);
                 }
                 itemView.findViewById(R.id.item_container).setBackground(layout1);
@@ -191,10 +190,13 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
      * This function will update the items list to the one stored by the dbHelper class.
      */
     public void updateItems(String filter){
-        this.items = dbHelper.getItems();
+        ArrayList<Item> source = dbHelper.getItemsCopy();
+        items.clear();
+        items.addAll(source);
         if (filter != null){
             filterItems(filter);
         }
+        notifyDataSetChanged();
     }
 
 
