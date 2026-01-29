@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment_container,homeFragment).commit();
 
         //Create an item to get the bottom navigation. Set the active item to an invisible item
-        //for ascetics.
+        //for aesthetics.
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setSelectedItemId(R.id.invisible);
 

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import com.example.myapplication.Fragments.ViewFragment;
 import com.example.myapplication.comparators.ItemComparator;
 import com.example.myapplication.comparators.MenuItemComparator;
 import com.example.myapplication.models.Item;
@@ -81,6 +82,10 @@ public class dbHelper {
         return this.items;
     }
 
+    public ArrayList<Item> getItemsCopy(){
+        return new ArrayList<>(items);
+    }
+
 
     /**
      * This function will return an ArrayList of MenuItems retrieved from the database.
@@ -100,9 +105,12 @@ public class dbHelper {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 items.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    System.out.println(ds);
                     Item item = ds.getValue(Item.class);
                     items.add(item);
                 }
+                itemSort();
+                ViewFragment.adapter.updateItems(null);
             }
 
             @Override

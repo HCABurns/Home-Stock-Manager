@@ -76,6 +76,8 @@ public class ViewFragment extends Fragment {
             }
         });
 
+        recyclerView.setAdapter(adapter);
+
         return view;
     }
 
